@@ -8,27 +8,24 @@ on:
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-        - name: Android32
-          os: ubuntu-latest
-          target: Android32
-        - name: Android64
-          os: ubuntu-latest
-          target: Android64
-    name: ${{ matrix.config.name }}
-    runs-on: ${{ matrix.config.os }}
+    name: Android64
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install older NDK
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;27.2.12479018"
+          NDK=$ANDROID_HOME/ndk/27.2.12479018
+          echo "ANDROID_NDK_HOME=$NDK" >> $GITHUB_ENV
+          echo "ANDROID_NDK_ROOT=$NDK" >> $GITHUB_ENV
+          echo "ANDROID_NDK_LATEST_HOME=$NDK" >> $GITHUB_ENV
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
           bindings: geode-sdk/bindings
           bindings-ref: main
           combine: true
-          target: ${{ matrix.config.target }}
+          target: Android64
 
   package:
     name: Package builds
