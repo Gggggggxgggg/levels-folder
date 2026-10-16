@@ -1,0 +1,15 @@
+{
+	"geode": "4.0.0",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "claude.levels-folder",
+	"name": "Levels Folder",
+	"version": "v1.0.0",
+	"developer": "Claude",
+	"description": "Папка с .gmd уровнями прямо в игре: кнопка в главном меню, список уровней, запуск одним нажатием.",
+	"tags": ["utility", "enhancement"]
+}
